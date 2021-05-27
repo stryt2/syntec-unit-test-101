@@ -31,16 +31,9 @@ namespace TryItYourself._3_OrderService
 			}
 		}
 
-		private List<Order> GetOrders()
+		protected virtual List<Order> GetOrders()
 		{
 			// parse csv file to get orders
-			var result = ReadOrders();
-
-			return result;
-		}
-
-		protected virtual List<Order> ReadOrders()
-		{
 			var result = new List<Order>();
 
 			// directly depend on File I/O
@@ -64,7 +57,7 @@ namespace TryItYourself._3_OrderService
 			return result;
 		}
 
-		protected virtual BookDao GetBookDao()
+		protected virtual IBookDao GetBookDao()
 		{
 			return new BookDao();
 		}
