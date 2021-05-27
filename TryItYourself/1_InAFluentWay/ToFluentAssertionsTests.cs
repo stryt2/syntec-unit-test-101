@@ -60,8 +60,8 @@ namespace TryItYourself._1_InAFluentWay
 
 			//Assert.That( greetings, Is.All.StartsWith( "h" ).IgnoreCase );
 			greetings
-				.Where( g => g.StartsWith( "h", StringComparison.CurrentCultureIgnoreCase ) )
-				.Should().BeEquivalentTo( greetings );
+				.Should()
+				.OnlyContain( g => g.StartsWith( "h", StringComparison.CurrentCultureIgnoreCase ) );
 		}
 
 		[Test]
@@ -103,9 +103,7 @@ namespace TryItYourself._1_InAFluentWay
 			sarray.Should().Contain( "b" );
 
 			//Assert.That( iarray, Has.Some.EqualTo( 3 ) );
-			iarray
-				.Where( i => i.Equals( 3 ) )
-				.Should().NotBeEmpty();
+			iarray.Should().Contain( 3 );
 		}
 
 		[Test]
@@ -124,7 +122,7 @@ namespace TryItYourself._1_InAFluentWay
 			( "Hello" ).Should().HaveLength( 5 );
 
 			//Assert.That( array2, Has.No.Property( "Length" ).GreaterThan( 3 ) );
-			array2.Should().HaveCountLessOrEqualTo( 3 );
+			array2.Should().NotContain( a => a.Length > 3 );
 		}
 
 		[Test]
