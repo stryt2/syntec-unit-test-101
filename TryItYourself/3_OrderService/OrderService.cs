@@ -25,7 +25,7 @@ namespace TryItYourself._3_OrderService
 			// only get orders of book
 			var ordersOfBook = orders.Where( x => x.Type == "Book" );
 
-			var bookDao = new BookDao();
+			var bookDao = GetBookDao();
 			foreach( var order in ordersOfBook ) {
 				bookDao.Insert( order );
 			}
@@ -34,6 +34,13 @@ namespace TryItYourself._3_OrderService
 		private List<Order> GetOrders()
 		{
 			// parse csv file to get orders
+			var result = ReadOrders();
+
+			return result;
+		}
+
+		protected virtual List<Order> ReadOrders()
+		{
 			var result = new List<Order>();
 
 			// directly depend on File I/O
@@ -55,6 +62,11 @@ namespace TryItYourself._3_OrderService
 			}
 
 			return result;
+		}
+
+		protected virtual BookDao GetBookDao()
+		{
+			return new BookDao();
 		}
 
 		private Order Mapping( string[] line )
